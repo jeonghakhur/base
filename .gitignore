@@ -1,0 +1,11 @@
+**/*.min.js
+**/dist/
+**/vendor/
+
+# OS or Editor folders
+._*
+.cache
+/.vscode/
+
+# Folders to ignore
+/node_modules/

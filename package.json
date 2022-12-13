@@ -1,0 +1,10 @@
+{
+  "name": "base",
+  "packageManager": "yarn@3.1.1",
+  "scripts": {
+    "css-compile": "sass --style expanded --source-map --embed-sources --no-error-css scss/:dist/css/"
+  },
+  "devDependencies": {
+    "sass": "^1.56.2"
+  }
+}
