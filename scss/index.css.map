@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,CAAC;AACD,CAAC,AAAA,QAAQ;AACT,CAAC,AAAA,OAAO,CAAC;EACP,UAAU,EAAE,UAAU;CACvB",
+    "sources": [
+        "index.scss",
+        "_reboot.scss"
+    ],
+    "names": [],
+    "file": "index.css"
+}
