@@ -9,3 +9,4 @@
 
 # Folders to ignore
 /node_modules/
+.yarn
