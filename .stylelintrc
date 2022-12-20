@@ -1,5 +1,9 @@
 {
-  "extends": [
-    "stylelint-config-standard-scss"
-  ]
+  "extends": ["stylelint-config-standard-scss"],
+  "rules": {
+    "alpha-value-notation": null,
+    "number-leading-zero": null,
+    "color-function-notation": null,
+    "scss/no-global-function-names": null
+  }
 }

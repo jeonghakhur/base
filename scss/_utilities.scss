@@ -1,0 +1,134 @@
+$spacers: (0: 0);
+$utilities: (
+  "vertical-align": (
+    class: va,
+    values: baseline top middle bottom text-bottom text-top,
+  ),
+  "float": (
+    class: f,
+    values: left right none,
+  ),
+  "opacity": (
+    class: o,
+    values: (0: 0, 25: .25, 50: .5, 75: .75, 100: 1)
+  ),
+  "overflow": (
+    class: o,
+    values: auto hidden visible scroll,
+  ),
+  "display": (
+    class: d,
+    values: inline inline-block block grid table table-row table-cell flex inline-flex none,
+  ),
+  "box-shadow": (
+    class: bs,
+    values: (
+      sm: 0 .125rem .25rem rgba(#000, .15),
+      lg: 0 1rem 3rem rgba(#000, .15),
+      none: none
+    )
+  ),
+  "position": (
+    class: p,
+    values: static relative absolute fixed sticky
+  ),
+  "top": (
+    class: t,
+    values: $position-values
+  ),
+  "bottom": (
+    class: b,
+    values: $position-values
+  ),
+  "left": (
+    class: l,
+    values: $position-values
+  ),
+  "right": (
+    class: r,
+    values: $position-values
+  ),
+  "translate": (
+    class: t,
+    values: (
+      xy: translate(-50%, -50%),
+      x: translateX(-50%),
+      y: translateY(-50%)
+    )
+  ),
+  "border": (
+    class: bd,
+    values: (
+      null: $border,
+      0: 0
+    ),
+  ),
+  "border-top": (
+    class: bdt,
+    values: (
+      null: $border,
+      0: 0
+    ),
+  ),
+  "border-bottom": (
+    class: bdb,
+    values: (
+      null: $border,
+      0: 0
+    ),
+  ),
+  "border-left": (
+    class: bdl,
+    values: (
+      null: $border,
+      0: 0
+    ),
+  ),
+  "border-right": (
+    class: bdr,
+    values: (
+      null: $border,
+      0: 0
+    ),
+  ),
+  "width": (
+    class: w,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto,
+      100vh: 100vh
+    )
+  ),
+  "max-width": (
+    class: mw,
+    values: (100: 100%)
+  ),
+
+);
+
+@each $key, $utility in $utilities {
+  $values: map-get($utility, values);
+  $class-name: if(map-has-key($utility, class), map-get($utility, class), $key);
+  $properties: if(map-has-key($utility, property), map-get($utility, property), $key);
+
+  @if type-of($properties) == "string" {
+    $properties: append((), $properties);
+  }
+
+  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list" {
+    $values: zip($values, $values);
+  }
+
+  @each $key, $value in $values {
+    $property-class: if($key == null, $class-name, $class-name + "-" + $key);
+
+    .#{$property-class} {
+      @each $property in $properties {
+        #{$property}: $value;
+      }
+    }
+  }
+}
