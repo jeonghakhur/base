@@ -1,3 +1,9 @@
+// color
+$white: #fff;
+
+// prefix
+$prefix: ip-;
+
 // scss-docs-start position-map
 $position-values: (
   0: 0,
@@ -7,3 +13,40 @@ $position-values: (
 
 // default border style
 $border: 1px solid #000;
+
+// width, height value
+$wdith-height-values: (
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  auto: auto
+);
+
+// flex values
+$flex-values: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+);
+
+// spacers
+// spacer-map(start, end, value, unit)
+$spacers: spacer-map(0, 12, 1rem, .25) !default;
+$negative-spacers: negativify-map($spacers);
+
+// $font-size-base affects the font size of the body text
+$font-size-base: .625rem !default; // `10px`
+
+// scss-docs-start font-sizes
+$font-sizes: (
+  xsm: $font-size-base * 1.2,
+  sm: $font-size-base * 1.4,
+  md: $font-size-base * 1.6,
+  lg: $font-size-base * 1.8,
+  xlg: $font-size-base * 2,
+  xxlg: $font-size-base * 2.4,
+) !default;
+// scss-docs-end font-sizes
+
+$gradient: linear-gradient(180deg, rgba($white, .15), rgba($white, 0)) !default;

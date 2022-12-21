@@ -1,1 +1,9 @@
-code 
+html[data-theme="light"] {
+  --background-color: white;
+  --color: black;
+}
+
+html[data-theme="dark"] {
+  --background-color: black;
+  --color: white;
+}

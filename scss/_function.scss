@@ -1,0 +1,25 @@
+@function spacer-map($start, $end, $value, $unit) {
+  $result: ();
+
+  @for $i from $start through $end {
+    @if ($i == 0) {
+      $result: map-merge($result, (0: 0));
+    } @else {
+      $result: map-merge($result, ($i: $value * ($i * $unit)));
+    }
+  }
+
+  @return $result;
+}
+
+@function negativify-map($map) {
+  $result: ();
+
+  @each $key, $value in $map {
+    @if $key != 0 {
+      $result: map-merge($result, ("n" + $key: (-$value)));
+    }
+  }
+
+  @return $result;
+}
