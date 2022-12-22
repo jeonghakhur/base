@@ -1,15 +1,44 @@
+// scss-docs-start utilities-colors
+$utilities-colors: $theme-colors-rgb !default;
+// scss-docs-end utilities-colors
+
+// scss-docs-start utilities-text-colors
+$utilities-text: map-merge(
+  $utilities-colors,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white),
+    "body": to-rgb($body-color)
+  )
+) !default;
+$utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text") !default;
+// scss-docs-end utilities-text-colors
+
+// scss-docs-start utilities-bg-colors
+$utilities-bg: map-merge(
+  $utilities-colors,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white),
+    "body": to-rgb($body-bg)
+  )
+) !default;
+$utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg") !default;
+// scss-docs-end utilities-bg-colors
+
+// scss-docs-start utilities-border-colors
+$utilities-border: map-merge(
+  $utilities-colors,
+  (
+    "white": to-rgb($white)
+  )
+) !default;
+$utilities-border-colors: map-loop($utilities-border, rgba-css-var, "$key", "border") !default;
+
 $utilities: (
-  "vertical-align": (
-    class: va,
-    values: baseline top middle bottom text-bottom text-top,
-  ),
   "float": (
-    class: f,
+    class: fl,
     values: left right none,
-  ),
-  "opacity": (
-    class: o,
-    values: (0: 0, 25: .25, 50: .5, 75: .75, 100: 1)
   ),
   "overflow": (
     class: o,
@@ -18,93 +47,6 @@ $utilities: (
   "display": (
     class: d,
     values: inline inline-block block grid table table-row table-cell flex inline-flex none,
-  ),
-  "box-shadow": (
-    class: bs,
-    values: (
-      sm: 0 .125rem .25rem rgba(#000, .15),
-      lg: 0 1rem 3rem rgba(#000, .15),
-      none: none
-    )
-  ),
-  "position": (
-    class: p,
-    values: static relative absolute fixed sticky
-  ),
-  "top": (
-    class: t,
-    values: $position-values
-  ),
-  "bottom": (
-    class: b,
-    values: $position-values
-  ),
-  "left": (
-    class: l,
-    values: $position-values
-  ),
-  "right": (
-    class: r,
-    values: $position-values
-  ),
-  "translate": (
-    class: t,
-    values: (
-      xy: translate(-50%, -50%),
-      x: translateX(-50%),
-      y: translateY(-50%)
-    )
-  ),
-  "border": (
-    class: bd,
-    values: (
-      null: $border,
-      0: 0
-    ),
-  ),
-  "border-top": (
-    class: bdt,
-    values: (
-      null: $border,
-      0: 0
-    ),
-  ),
-  "border-bottom": (
-    class: bdb,
-    values: (
-      null: $border,
-      0: 0
-    ),
-  ),
-  "border-left": (
-    class: bdl,
-    values: (
-      null: $border,
-      0: 0
-    ),
-  ),
-  "border-right": (
-    class: bdr,
-    values: (
-      null: $border,
-      0: 0
-    ),
-  ),
-  "width": (
-    class: w,
-    values: map-merge($wdith-height-values, (100vw: 100vw))
-  ),
-  "max-width": (
-    class: mw,
-    values: (100: 100%)
-  ),
-  "height": (
-    class: h,
-    values: map-merge($wdith-height-values, (100vh: 100vh))
-  ),
-  "max-height": (
-    class: mh,
-    values: (100: 100%)
   ),
   "flex": (
     class: f,
@@ -143,6 +85,55 @@ $utilities: (
   "align-self": (
     class: as,
     values: map-merge($flex-values, (auto: auto, baseline: baseline, stretch: stretch)),
+  ),
+  "gap": (
+    class: g,
+    values: $spacers
+  ),
+  "position": (
+    class: p,
+    values: static relative absolute fixed sticky
+  ),
+  "top": (
+    class: top,
+    values: $position-values
+  ),
+  "bottom": (
+    class: bottom,
+    values: $position-values
+  ),
+  "left": (
+    class: left,
+    values: $position-values
+  ),
+  "right": (
+    class: right,
+    values: $position-values
+  ),
+  "transform": (
+    class: t,
+    values: (
+      xy: translate(-50%, -50%),
+      x: translateX(-50%),
+      y: translateY(-50%)
+    )
+  ),
+
+  "width": (
+    class: w,
+    values: map-merge($wdith-height-values, (100vw: 100vw))
+  ),
+  "max-width": (
+    class: mw,
+    values: (100: 100%)
+  ),
+  "height": (
+    class: h,
+    values: map-merge($wdith-height-values, (100vh: 100vh))
+  ),
+  "max-height": (
+    class: mh,
+    values: (100: 100%)
   ),
   "margin": (
     class: m,
@@ -246,9 +237,121 @@ $utilities: (
     class: pl,
     values: $spacers
   ),
-  "gap": (
-    class: g,
-    values: $spacers
+  "border": (
+    class: bd,
+    values: (
+      null: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color),
+      0: 0
+    ),
+  ),
+  "border-top": (
+    class: bdt,
+    values: (
+      null: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color),
+      0: 0
+    ),
+  ),
+  "border-bottom": (
+    class: bdb,
+    values: (
+      null: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color),
+      0: 0
+    ),
+  ),
+  "border-left": (
+    class: bdl,
+    values: (
+      null: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color),
+      0: 0
+    ),
+  ),
+  "border-right": (
+    class: br,
+    values: (
+      null: var(--#{$prefix}border-width) var(--#{$prefix}border-style) var(--#{$prefix}border-color),
+      0: 0
+    ),
+  ),
+  "border-color": (
+    class: bdc,
+    local-vars: (
+      "border-opacity": 1
+    ),
+    values: $utilities-border-colors
+  ),
+  "border-width": (
+    css-var: true,
+    class: bdw,
+    values: $border-widths
+  ),
+  "border-opacity": (
+    css-var: true,
+    class: bdo,
+    values: (
+      10: .1,
+      25: .25,
+      50: .5,
+      75: .75,
+      100: 1
+    )
+  ),
+  "border-radius": (
+    class: bd-r,
+    values: (
+      none: 0,
+      sm: $spacer * .4,
+      md: $spacer * .8,
+      lg: $spacer * 1.2,
+      xl: $spacer * 1.6,
+      circle: 50%,
+    )
+  ),
+  "box-shadow": (
+    class: bxs,
+    values: (
+      sm: 0 .125rem .25rem rgba(#000, .15),
+      lg: 0 1rem 3rem rgba(#000, .15),
+      none: none
+    )
+  ),
+  "color": (
+    class: c,
+    local-vars: (
+      "text-opacity": 1
+    ),
+    values: map-merge(
+      $utilities-text-colors,
+      (
+        "muted": $gray-600,
+        "reset": inherit,
+      )
+    )
+  ),
+  "background-color": (
+    class: bc,
+    local-vars: (
+      "bg-opacity": 1
+    ),
+    values: map-merge(
+      $utilities-bg-colors,
+      (
+        "transparent": transparent,
+      )
+    )
+  ),
+  "opacity": (
+    class: o,
+    values: (0: 0, 25: .25, 50: .5, 75: .75, 100: 1)
+  ),
+  "text-opacity": (
+    css-var: true,
+    class: to,
+    values: (
+      25: .25,
+      50: .5,
+      75: .75,
+      100: 1
+    )
   ),
   "font-size": (
     class: fs,
@@ -284,6 +387,10 @@ $utilities: (
     class: tt,
     values: lowercase uppercase capitalize
   ),
+  "vertical-align": (
+    class: va,
+    values: baseline top middle bottom text-bottom text-top,
+  ),
   "white-space": (
     class: ws,
     values: (
@@ -302,13 +409,28 @@ $utilities: (
       visible: visible,
       invisible: hidden,
     )
-  )
+  ),
+  "gradient": (
+    property: background-image,
+    class: bg,
+    values: (gradient: $gradient)
+  ),
+  "user-select": (
+    class: us,
+    values: all auto none
+  ),
+  "pointer-events": (
+    class: pe,
+    values: none auto,
+  ),
 );
 
 @each $key, $utility in $utilities {
   $values: map-get($utility, values);
   $class-name: if(map-has-key($utility, class), map-get($utility, class), $key);
   $properties: if(map-has-key($utility, property), map-get($utility, property), $key);
+  $is-css-var: map-get($utility, css-var);
+  $is-local-vars: map-get($utility, local-vars);
 
   @if type-of($properties) == "string" {
     $properties: append((), $properties);
@@ -321,9 +443,20 @@ $utilities: (
   @each $key, $value in $values {
     $property-class: if($key == null, $class-name, $class-name + "-" + $key);
 
-    .#{$property-class} {
-      @each $property in $properties {
-        #{$property}: $value !important;
+    @if $is-css-var {
+      .#{$property-class} {
+        --#{$prefix}#{$properties}: #{$value};
+      }
+    } @else {
+      .#{$property-class} {
+        @each $property in $properties {
+          @if $is-local-vars {
+            @each $local-var, $variable in $is-local-vars {
+              --#{$prefix}#{$local-var}: #{$variable};
+            }
+          }
+          #{$property}: $value !important;
+        }
       }
     }
   }

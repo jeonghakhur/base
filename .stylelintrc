@@ -1,13 +1,33 @@
 {
   "extends": ["stylelint-config-standard-scss"],
   "rules": {
+    "max-line-length": null,
     "at-rule-empty-line-before": null,
     "alpha-value-notation": null,
     "number-leading-zero": null,
+    "value-list-max-empty-lines": null,
     "selector-attribute-quotes": null,
     "color-function-notation": null,
-    "scss/no-global-function-names": null,
+    "declaration-empty-line-before": null,
+    "max-empty-lines": 2,
+    "scss/at-extend-no-missing-placeholder": null,
+    "scss/at-function-named-arguments": "never",
+    "scss/at-if-closing-brace-newline-after": null,
+    "scss/at-if-closing-brace-space-after": null,
+    "scss/at-if-no-null": null,
+    "scss/at-mixin-argumentless-call-parentheses": "always",
+    "scss/at-mixin-pattern": null,
     "scss/at-rule-conditional-no-parentheses": null,
-    "scss/double-slash-comment-empty-line-before": null
+    "scss/comment-no-empty": null,
+    "scss/dimension-no-non-numeric-values": true,
+    "scss/dollar-variable-colon-space-after": "at-least-one-space",
+    "scss/dollar-variable-empty-line-before": null,
+    "scss/double-slash-comment-empty-line-before": null,
+    "scss/double-slash-comment-whitespace-inside": null,
+    "scss/function-quote-no-quoted-strings-inside": null,
+    "scss/media-feature-value-dollar-variable": null,
+    "scss/no-global-function-names": null,
+    "scss/selector-no-redundant-nesting-selector": true,
+    "scss/dollar-variable-pattern": null
   }
 }

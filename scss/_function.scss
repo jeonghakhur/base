@@ -17,9 +17,39 @@
 
   @each $key, $value in $map {
     @if $key != 0 {
+      /* stylelint-disable-next-line scss/no-global-function-names */
       $result: map-merge($result, ("n" + $key: (-$value)));
     }
   }
 
   @return $result;
+}
+
+@function to-rgb($value) {
+  @return red($value), green($value), blue($value);
+}
+
+@function rgba-css-var($identifier, $target) {
+  @if $identifier == "body" and $target == "bg" {
+    @return rgba(var(--#{$prefix}#{$identifier}-bg-rgb), var(--#{$prefix}#{$target}-opacity));
+  } @if $identifier == "body" and $target == "text" {
+    @return rgba(var(--#{$prefix}#{$identifier}-color-rgb), var(--#{$prefix}#{$target}-opacity));
+  } @else {
+    @return rgba(var(--#{$prefix}#{$identifier}-rgb), var(--#{$prefix}#{$target}-opacity));
+  }
+}
+
+@function map-loop($map, $func, $args...) {
+  $_map: ();
+
+  @each $key, $value in $map {
+    $_args: ();
+    @each $arg in $args {
+      $_args: append($_args, if($arg == "$key", $key, if($arg == "$value", $value, $arg)));
+    }
+
+    $_map: map-merge($_map, ($key: call(get-function($func), $_args...)));
+  }
+
+  @return $_map;
 }
