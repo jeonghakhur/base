@@ -220,3 +220,9 @@ $zindex-popover: 1070 !default;
 $zindex-tooltip: 1080 !default;
 $zindex-toast: 1090 !default;
 // scss-docs-end zindex-stack
+
+$transition-base:             all .2s ease-in-out !default;
+$transition-fade:             opacity .15s linear !default;
+// scss-docs-start collapse-transition
+$transition-collapse:         height .35s ease !default;
+$transition-collapse-width:   width .35s ease !default;

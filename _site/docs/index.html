@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="../../js/index.js"></script>
+  <script src="../../dist/js/uxui.js"></script>
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
@@ -28,6 +28,11 @@
       </div>
     </div>
   </div>
+  <script>
+    
+    var modal = new uxui.Modal(document.querySelector('body'))
+    console.log(uxui.Modal.getInstance(document.querySelector('body')))
+  </script>
 </body>
 
 </html>

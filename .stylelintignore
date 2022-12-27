@@ -2,3 +2,4 @@
 **/vendor/
 /_site/
 /js/coverage/
+/scss/_variables.scss
