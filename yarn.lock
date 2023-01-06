@@ -1751,6 +1751,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^22.0.1
     "@rollup/plugin-node-resolve": ^13.3.0
     "@rollup/plugin-replace": ^4.0.0
+    jquery: ^3.6.3
     nodemon: ^2.0.20
     npm-run-all: ^4.1.5
     rollup: ^3.8.1
@@ -3021,6 +3022,13 @@ __metadata:
     istanbul-lib-coverage: ^3.2.0
     semver: ^6.3.0
   checksum: bf16f1803ba5e51b28bbd49ed955a736488381e09375d830e42ddeb403855b2006f850711d95ad726f2ba3f1ae8e7366de7e51d2b9ac67dc4d80191ef7ddf272
+  languageName: node
+  linkType: hard
+
+"jquery@npm:^3.6.3":
+  version: 3.6.3
+  resolution: "jquery@npm:3.6.3"
+  checksum: 0fd366bdcaa0c84a7a8751ce20f8192290141913978b5059574426d9b01f4365daa675f95aab3eec94fd794d27b08d32078a2236bef404b8ba78073009988ce6
   languageName: node
   linkType: hard
 

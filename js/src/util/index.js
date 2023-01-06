@@ -103,12 +103,67 @@ const getjQuery = () => {
   return null
 }
 
+const isDisabled = element => {
+  if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+    return true
+  }
+
+  if (element.classList.contains('disabled')) {                                                                                                                                     
+    return true
+  }
+
+  if (typeof element.disabled !== 'undefined') {
+    return element.disabled
+  }
+
+  return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false'
+}
+
+const isVisible = element => {
+  if (!isElement(element) || element.getClientRects().length === 0) {
+    return false
+  }
+
+  const elementIsVisible = getComputedStyle(element).getPropertyValue('visibility') === 'visible'
+
+  return elementIsVisible
+}
+
+const getSelector = element => {
+  let selector = element.getAttribute('data-target')
+
+  if (!selector || selector === '#') {
+    let hrefAttribute = element.getAttribute('href')
+
+    if (!hrefAttribute || (!hrefAttribute.includes('#') && !hrefAttribute.startsWith('.'))) {
+      return null
+    }
+
+    if (hrefAttribute.includes('#') && !hrefAttribute.startsWith('#')) {
+      hrefAttribute = `#${hrefAttribute.split('#')[1]}`
+    }
+
+    selector = hrefAttribute && hrefAttribute !== '#' ? hrefAttribute.trim() : null
+  }
+
+  return selector
+}
+
+const getElementFromSelector = element => {
+  const selector = getSelector(element)
+
+  return selector ? document.querySelector(selector) : null
+}
 
 export {
   toType,
   getUID,
   isElement,
   getElement,
+  getElementFromSelector,
   execute,
   executeAfterTransition,
+  getjQuery,
+  isDisabled,
+  isVisible
 }

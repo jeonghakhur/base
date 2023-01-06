@@ -6,11 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- <script src="../../node_modules/jquery/dist/jquery.js"></script> -->
   <script src="../../dist/js/uxui.js"></script>
+
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
 <body>
+  <div class="w-100 bc-warning" style="height: 200vh">
+    <button type="button" data-toggle="modal">Modal Open</button>
+  </div>
+
+  <details>
+    <summary>details summary</summary>
+    <ul>
+      <li><a href="">디테일 컨텐츠 1</a></li>
+    </ul>
+  </details>
+
   <div class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -22,16 +35,18 @@
           <p>Modal body text goes here.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+            style="visibility: visible">Close</button>
+          <button type="button" class="btn btn-primary"><span>Save changes</span></button>
         </div>
       </div>
     </div>
   </div>
   <script>
-    
-    var modal = new uxui.Modal(document.querySelector('body'))
-    console.log(uxui.Modal.getInstance(document.querySelector('body')))
+    // $(document).on('click', function () {
+    //   console.log('jQuery Event')
+    // })
+
   </script>
 </body>
 

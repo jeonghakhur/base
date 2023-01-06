@@ -18,12 +18,20 @@ class BaseComponent {
 
   // Public
 
+  _getConfig(config) {
+
+  }
+
   static get DATA_KEY() {
     return `ip.${this.NAME}`
   }
 
   static getInstance(element) {
     return Data.get(getElement(element), this.DATA_KEY)
+  }
+
+  static getOrCreateInstance(element, config = {}) {
+    return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null)
   }
 }
 
