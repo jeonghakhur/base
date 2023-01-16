@@ -13,6 +13,10 @@
 
 .modal-dialog {
   position: relative;
+  width: 500px;
+  margin: 2rem;
+  margin-right: auto;
+  margin-left: auto;
 
   .modal.fade & {
     transition: transform .3s ease-out;
@@ -23,15 +27,28 @@
     transform: none;
   }
 
-  .modal.dialog-static & {
+  .modal.modal-static & {
     transform: scale(1.02);
+  }
+}
+
+.modal-dialog-scrollable {
+  height: calc(100% - 2rem * 2);
+
+  .modal-content {
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-body {
+    overflow-y: auto;
   }
 }
 
 .modal-dialog-centered {
   display: flex;
   align-items: center;
-  min-height: calc(100% - 1rem);
+  min-height: calc(100% - 2rem);
 }
 
 .modal-content {
@@ -40,6 +57,7 @@
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
+  background-color: $white;
 }
 
 .modal-backdrop {
@@ -50,6 +68,7 @@
   width: 100vw;
   height: 100vh;
   background-color: $black;
+  // transition: opacity 1s ease-in;
 
   &.fade { opacity: 0; }
   &.show { opacity: .5; }
@@ -75,8 +94,10 @@
 
 .modal-body {
   position: relative;
+  flex: 1 1 auto;
 }
 
 .modal-footer {
   display: flex;
+  flex-shrink: 0;
 }

@@ -31,24 +31,24 @@ function normalizeDataKey(key) {
 }
 
 const Manipulator = {
-  setDataAtrribute(element, key, value) {
-    element.setAttribute(`data-ipx-${normalizeDataKey(key)}`, value)
+  setDataAttribute(element, key, value) {
+    element.setAttribute(`data-${normalizeDataKey(key)}`, value)
   },
 
   removeDataAttribute(element, key) {
-    element.removeAttribute(`data-ipx-${normalizeDataKey(key)}`)
+    element.removeAttribute(`data-${normalizeDataKey(key)}`)
   },
 
-  getDataAttribute(element) {
+  getDataAttributes(element) {
     if (!element) {
       return {}
     }
 
     const attribute = {}
-    const ipxKeys = Object.keys(element.dataset).filter(key => key.startsWith('ipx') && !key.startsWith('ipxConfig'))
+    const keys = Object.keys(element.dataset).filter(key => !key.startsWith('Config'))
 
-    for (const key of ipxKeys) {
-      let pureKey = key.replace(/^ipx/, '')
+    for (const key of keys) {
+      let pureKey = key
       pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length)
       attribute[pureKey] = normalizeData(element.dataset[key])
     }
@@ -57,7 +57,7 @@ const Manipulator = {
   },
 
   getDataAttribute(element, key) {
-    return normalizeData(element.getAttribute(`data-ipx-${normalizeDataKey(key)}`))
+    return normalizeData(element.getAttribute(`data-${normalizeDataKey(key)}`))
   }
 }
 

@@ -59,8 +59,6 @@ const nativeEvents = new Set([
   'scroll'
 ])
 
-console.clear()
-
 function makeEventUid(element, uid) {
   return (uid && `${uid}::${uidEvent++}`) || element.uidEvent || uidEvent++
 }
@@ -202,7 +200,6 @@ function removeNamespaceHandlers(element, events, typeEvent, namespace) {
   const storeElementEvent = events[typeEvent] || {}
 
   for (const handlerKey of Object.keys(storeElementEvent)) {
-    console.log(handlerKey)
     if (handlerKey.includes(namespace)) {
       const event = storeElementEvent[handlerKey]
       removeHandler(element, events, typeEvent, event.callable, event.delegationSelector)

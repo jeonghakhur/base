@@ -6,6 +6,9 @@ class Config {
     return {}
   }
 
+  static get DefaultType() {
+    return {}
+  }
 
   static get NAME() {
     throw new Error('You have to implement the static methode "NAME", for each component')

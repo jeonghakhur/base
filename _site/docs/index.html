@@ -12,39 +12,48 @@
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
-<body>
-  <div class="w-100 bc-warning" style="height: 200vh">
-    <button type="button" data-toggle="modal">Modal Open</button>
-  </div>
-
-  <details>
-    <summary>details summary</summary>
-    <ul>
-      <li><a href="">디테일 컨텐츠 1</a></li>
-    </ul>
-  </details>
-
-  <div class="modal" tabindex="-1">
-    <div class="modal-dialog">
+<body class="">
+  <div class="modal fade" tabindex="-1" id="modalA" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body c-black to-25">
-          <p>Modal body text goes here.</p>
+          <div style="height: 100vh">
+            <p>Modal body text goes here.</p>
+            <p>Modal body text goes here.</p>
+            <p>Modal body text goes here.</p>
+            <p>Modal body text goes here.</p>
+          </div>
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"
             style="visibility: visible">Close</button>
           <button type="button" class="btn btn-primary"><span>Save changes</span></button>
         </div>
       </div>
     </div>
   </div>
+  <div class="w-100 bc-warning" style="height: 100vh">
+    <!-- <div class="is-fixed" style="position: fixed; top: 0; width: 100%; text-align: right">
+      division content
+    </div> -->
+    <button type="button" data-toggle="modal" data-target="#modalA">Modal Open</button>
+  </div>
+
+
   <script>
-    // $(document).on('click', function () {
-    //   console.log('jQuery Event')
+    // $(function () {
+    //   function log(msg) {
+    //     console.log(msg)
+    //   }
+    //   $('[data-toggle="modal"]').on('click.modal', function () {
+    //     log('a')
+    //   })
+    //   $('[data-toggle="modal"]').on('click.modal', log('b'))
     // })
 
   </script>

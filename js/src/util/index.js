@@ -18,7 +18,7 @@ const getUID = prefix => {
   return prefix
 }
 
-const isElement = object => {
+const isElement = (object) => {
   if (!object || typeof object !== 'object') {
     return false
   }
@@ -34,6 +34,12 @@ const getElement = object => {
   if (isElement(object)) {
     return object.jquery ? object[0] : object
   }
+
+  if (typeof object === 'string' && object.length > 0) {
+    return document.querySelector(object)
+  }
+
+  return null
 }
 
 const getTransitionDurationFromElement = element => {
@@ -74,7 +80,6 @@ const executeAfterTransition = (callback, transitionElement, waitForTransition =
 
   const durationPadding = 5
   const emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding
-
   let called = false
   
   const handler = ({target}) => {
@@ -155,6 +160,10 @@ const getElementFromSelector = element => {
   return selector ? document.querySelector(selector) : null
 }
 
+const reflow = element => {
+  element.offsetHeight
+}
+
 export {
   toType,
   getUID,
@@ -165,5 +174,6 @@ export {
   executeAfterTransition,
   getjQuery,
   isDisabled,
-  isVisible
+  isVisible,
+  reflow
 }
