@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <!-- <script src="../../node_modules/jquery/dist/jquery.js"></script> -->
+  <script src="../../node_modules/jquery/dist/jquery.js"></script>
   <script src="../../dist/js/uxui.js"></script>
 
   <link rel="stylesheet" href="../../dist/css/index.css">
@@ -14,7 +14,7 @@
 
 <body class="">
   <div class="modal fade" tabindex="-1" id="modalA" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog modal-dialog-scrollable ,">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Modal title</h5>
@@ -22,6 +22,7 @@
         </div>
         <div class="modal-body c-black to-25">
           <div style="height: 100vh">
+            <a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me</a>
             <p>Modal body text goes here.</p>
             <p>Modal body text goes here.</p>
             <p>Modal body text goes here.</p>
@@ -46,15 +47,10 @@
 
 
   <script>
-    // $(function () {
-    //   function log(msg) {
-    //     console.log(msg)
-    //   }
-    //   $('[data-toggle="modal"]').on('click.modal', function () {
-    //     log('a')
-    //   })
-    //   $('[data-toggle="modal"]').on('click.modal', log('b'))
-    // })
+    $(function () {
+      $('.modal').modal('show')
+      $('[data-toggle="tooltip"]').tooltip()
+    })
 
   </script>
 </body>

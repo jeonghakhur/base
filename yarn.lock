@@ -1411,7 +1411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.11.5":
+"@popperjs/core@npm:^2.11.6":
   version: 2.11.6
   resolution: "@popperjs/core@npm:2.11.6"
   checksum: 47fb328cec1924559d759b48235c78574f2d71a8a6c4c03edb6de5d7074078371633b91e39bbf3f901b32aa8af9b9d8f82834856d2f5737a23475036b16817f0
@@ -1746,7 +1746,7 @@ __metadata:
     "@babel/cli": ^7.18.10
     "@babel/core": ^7.18.10
     "@babel/preset-env": ^7.18.10
-    "@popperjs/core": ^2.11.5
+    "@popperjs/core": ^2.11.6
     "@rollup/plugin-babel": ^5.3.1
     "@rollup/plugin-commonjs": ^22.0.1
     "@rollup/plugin-node-resolve": ^13.3.0
@@ -1760,6 +1760,8 @@ __metadata:
     stylelint: ^14.16.0
     stylelint-config-standard: ^29.0.0
     stylelint-config-standard-scss: ^6.1.0
+  peerDependencies:
+    "@popperjs/core": ^2.11.5
   languageName: unknown
   linkType: soft
 

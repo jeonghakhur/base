@@ -52,7 +52,7 @@ const Manipulator = {
       pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length)
       attribute[pureKey] = normalizeData(element.dataset[key])
     }
-
+    console.log(attribute)
     return attribute
   },
 

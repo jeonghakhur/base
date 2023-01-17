@@ -79,7 +79,7 @@ function getTypeEvent(event) {
 
 function normalizeParameters(originalTypeEvent, handler, delegationFunction) {
   const isDelegated = typeof handler === 'string'
-  const callable = isDelegated ? delegationFunction : handler
+  const callable = isDelegated ? delegationFunction : (handler || delegationFunction)
   let typeEvent = getTypeEvent(originalTypeEvent)
 
   if (!nativeEvents.has(typeEvent)) {
@@ -169,7 +169,7 @@ function addHandler(element, originalTypeEvent, handler, delegationFunction, one
   const previousFunction = findHandler(handlers, callable, isDelegated ? handler : null)
 
   if (previousFunction) {
-    previousFunction.oneOff = previousFunction.oneOff && onOff
+    previousFunction.oneOff = previousFunction.oneOff && oneOff
 
     return
   }

@@ -164,6 +164,36 @@ const reflow = element => {
   element.offsetHeight
 }
 
+const DOMContentLoadedCallbacks = []
+
+const onDOMContentLoaded = callback => {
+  if (document.readyState === 'loading') {
+    if (!DOMContentLoadedCallbacks.length) {
+      document.addEventListener('DOMContentLoaded',() => {
+        for (const callback of DOMContentLoadedCallbacks) {
+          callback()
+        }
+      })
+    }
+
+    DOMContentLoadedCallbacks.push(callback)
+  } else {
+    callback()
+  }
+}
+
+const defineJQueryPlugin = plugin => {
+  onDOMContentLoaded(() => {
+    const $ = getjQuery()
+
+    if($) {
+      const name = plugin.NAME
+      $.fn[name] = plugin.jQueryInterface
+      $.fn[name].Constructor = plugin
+    }
+  })
+}
+
 export {
   toType,
   getUID,
@@ -175,5 +205,6 @@ export {
   getjQuery,
   isDisabled,
   isVisible,
-  reflow
+  reflow,
+  defineJQueryPlugin
 }

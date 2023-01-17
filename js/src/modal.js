@@ -1,4 +1,4 @@
-import { getElementFromSelector, reflow } from './util/index'
+import { getElementFromSelector, reflow, defineJQueryPlugin } from './util/index'
 import BaseComponent from './base-component'
 import EventHandler from './dom/event-handler'
 import SelectorEngine from './dom/selector-engine'
@@ -33,7 +33,6 @@ class Modal extends BaseComponent {
     this._isTransitioning = false
     this._scrollBar = new ScrollBarHelper()
 
-    console.log(this._config)
     this._addEventListeners()
   }
 
@@ -100,8 +99,6 @@ class Modal extends BaseComponent {
 
     this._queueCallback(() => this._hideModal(), this._element, this._isAnimated())
   }
-
-
 
   _showElement(relatedTarget) {
     if (!document.body.contains(this._element)) {
@@ -230,6 +227,22 @@ class Modal extends BaseComponent {
 
     this._element.focus()
   }
+
+  static jQueryInterface(config, relatedTarget) {
+    return this.each(function() {
+      const data = Modal.getOrCreateInstance(this, config)
+
+      if (typeof config !== 'string') {
+        return
+      }
+
+      if (typeof data[config] === 'undefined') {
+        throw new TypeError(`No method named "${config}"`)
+      }
+
+      data[config](relatedTarget)
+    })
+  }
 }
 
 EventHandler.on(document, 'click.modal.data-api', '[data-toggle="modal"]', function(event) {
@@ -242,8 +255,6 @@ EventHandler.on(document, 'click.modal.data-api', '[data-toggle="modal"]', funct
 
 enableDismissTrigger(Modal)
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('[data-toggle="modal"]').dispatchEvent(new Event('click'))
-})
+defineJQueryPlugin(Modal)
 
 export default Modal
