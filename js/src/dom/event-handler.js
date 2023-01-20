@@ -265,10 +265,11 @@ const EventHandler = {
     let bubbles = true
     let nativeDispatch = true
     let defaultPrevented = false
-
+ 
     if (inNamespace && $) {
       jQueryEvent = $.Event(event, args)
 
+      $(element).trigger(jQueryEvent)
       bubbles = !jQueryEvent.isPropagationStopped()
       nativeDispatch = !jQueryEvent.isImmediatePropagationStopped()
       defaultPrevented = jQueryEvent.isDefaultPrevented()

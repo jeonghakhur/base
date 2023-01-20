@@ -164,6 +164,27 @@ const reflow = element => {
   element.offsetHeight
 }
 
+const findShadowRoot = element => {
+  if (!document.documentElement.attachShadow) {
+    return null
+  }
+
+  if (typeof element.getRootNode === 'function') {
+    const root = element.getRootNode()
+    return root instanceof ShadowRoot ? root : null
+  }
+
+  if (element instanceof ShdowRoot) {
+    return element
+  }
+
+  if (!element.parentNode) {
+    return null
+  }
+
+  return findShadowRoot(element.parentNode)
+}
+
 const DOMContentLoadedCallbacks = []
 
 const onDOMContentLoaded = callback => {
@@ -206,5 +227,6 @@ export {
   isDisabled,
   isVisible,
   reflow,
+  findShadowRoot,
   defineJQueryPlugin
 }

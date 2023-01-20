@@ -8,7 +8,7 @@ import { enableDismissTrigger } from './util/component-function'
 import ScrollBarHelper from './util/scrollbar'
 
 const NAME = 'modal'
-const EVENT_KEY = `${EVENT_KEY}`
+const EVENT_KEY = `.${NAME}`
 
 const Default = {
   backdrop: true,
@@ -62,7 +62,7 @@ class Modal extends BaseComponent {
       return
     }
 
-    const showEvent = EventHandler.trigger(this._element, 'show.modal', {
+    const showEvent = EventHandler.trigger(this._element, `show${EVENT_KEY}`, {
       relatedTarget
     })
 
