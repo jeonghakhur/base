@@ -32,25 +32,6 @@
   }
 }
 
-.modal-dialog-scrollable {
-  height: calc(100% - 2rem * 2);
-
-  .modal-content {
-    max-height: 100%;
-    overflow: hidden;
-  }
-
-  .modal-body {
-    overflow-y: auto;
-  }
-}
-
-.modal-dialog-centered {
-  display: flex;
-  align-items: center;
-  min-height: calc(100% - 2rem);
-}
-
 .modal-content {
   position: relative;
   display: flex;
@@ -100,4 +81,23 @@
 .modal-footer {
   display: flex;
   flex-shrink: 0;
+}
+
+.modal-dialog-scrollable {
+  height: calc(100% - 2rem * 2);
+
+  .modal-content {
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  .modal-body {
+    overflow-y: auto;
+  }
+}
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 2rem);
 }

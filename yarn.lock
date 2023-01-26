@@ -1761,7 +1761,7 @@ __metadata:
     stylelint-config-standard: ^29.0.0
     stylelint-config-standard-scss: ^6.1.0
   peerDependencies:
-    "@popperjs/core": ^2.11.5
+    "@popperjs/core": "*"
   languageName: unknown
   linkType: soft
 

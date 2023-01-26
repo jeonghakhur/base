@@ -1,0 +1,78 @@
+$arrow-width: 12.8px;
+$arrow-height: 6.4px;
+
+.tooltip {
+  z-index: 1080;
+  display: block;
+  padding: 1rem;
+  margin: 1rem;
+  word-wrap: break-word;
+  opacity: 0;
+
+  &.show {
+    opacity: .9;
+  }
+
+  &-arrow {
+    display: block;
+    width: $arrow-width;
+    height: $arrow-height;
+
+    &::before {
+      position: absolute;
+      content: "";
+      border-color: $black;
+      border-style: solid;
+    }
+
+    .tooltip-top & {
+      bottom: 0;
+
+      &::before {
+        top: -1px;
+        border-width: $arrow-height calc($arrow-width * .5) 0;
+      }
+    }
+
+    .tooltip-end & {
+      left: 0;
+      width: $arrow-height;
+      height: $arrow-width;
+
+      &::before {
+        right: -1px;
+        border-width: calc($arrow-width * .5) $arrow-height calc($arrow-width * .5) 0;
+      }
+    }
+
+    .tooltip-bottom & {
+      top: 0;
+
+      &::before {
+        bottom: -1px;
+        border-width: 0 calc($arrow-width * .5) $arrow-height;
+      }
+    }
+
+    .tooltip-start & {
+      right: 0;
+      width: $arrow-height;
+      height: $arrow-width;
+
+      &::before {
+        left: -1px;
+        border-width: calc($arrow-width * .5) 0 calc($arrow-width * .5) $arrow-height;
+      }
+    }
+  }
+
+  &-inner {
+    max-width: 200px;
+    padding: 4px 8px;
+    color: $black;
+    text-align: left;
+    background-color: $white;
+    border-radius: 6px;
+  }
+}
+

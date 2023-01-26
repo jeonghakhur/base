@@ -11,7 +11,7 @@
     "watch-js": "nodemon --watch js/ --ext js --exec \"npm-run-all js-compile\""
   },
   "peerDependencies": {
-    "@popperjs/core": "^2.11.5"
+    "@popperjs/core": "*"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",

@@ -215,6 +215,11 @@ const defineJQueryPlugin = plugin => {
   })
 }
 
+const log = msg => {
+  console.clear()
+  console.log([...msg])
+}
+
 export {
   toType,
   getUID,
@@ -228,5 +233,6 @@ export {
   isVisible,
   reflow,
   findShadowRoot,
-  defineJQueryPlugin
+  defineJQueryPlugin,
+  log
 }

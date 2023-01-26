@@ -2,7 +2,7 @@
 
 const path = require('path')
 const { babel } = require('@rollup/plugin-babel')
-const { nodeResolve } = require('@rollup/plugin-node-resolve')
+// const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
 
 const plugins = [
@@ -11,19 +11,24 @@ const plugins = [
     exclude: 'node_modules/**',
     // Include the helpers in the bundle, at most one copy of each
     babelHelpers: 'bundled'
-  }),
-
+  })
 ]
+
+const globals = {
+  '@popperjs/core': 'Popper'
+}
 
 const rollupConfig = {
   input: path.resolve(__dirname, `../js/index.js`),
   output: {
     file: path.resolve(__dirname, `../dist/js/uxui.js`),
     format: 'umd',
-    generatedCode: 'es2015'
+    generatedCode: 'es2015',
+    globals
   },
   plugins
 }
+
 rollupConfig.output.name = 'uxui'
 
 module.exports = rollupConfig

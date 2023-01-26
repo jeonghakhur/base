@@ -1,8 +1,9 @@
-
+import * as Popper from '@popperjs/core'
 import BaseComponent from './base-component'
 import EventHandler from './dom/event-handler'
-import { defineJQueryPlugin, getElement, findShadowRoot, getUID } from './util/index'
+import { defineJQueryPlugin, getElement, findShadowRoot, getUID, log } from './util/index'
 import SelectorEngine from './dom/selector-engine'
+
 
 const NAME = 'tooltip'
 const EVENT_KEY = `.${NAME}`
@@ -52,6 +53,10 @@ const DefaultType = {
 
 class Tooltip extends BaseComponent {
   constructor(element, config) {
+    if (typeof Popper === 'undefined') {
+      throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)')
+    }
+    
     super(element, config)
     // console.clear()
 
@@ -66,7 +71,6 @@ class Tooltip extends BaseComponent {
 
     // Protected
     this.tip = null
-
     this._setListeners()
 
   }
@@ -86,6 +90,7 @@ class Tooltip extends BaseComponent {
 
   // Public
   show() {
+    
     if (this._element.style.display === 'none') {
       throw new Error('Please use show on visible elements')
     }
@@ -106,78 +111,66 @@ class Tooltip extends BaseComponent {
       this.tip.remove()
       this.tip = null
     }
+
+    this.tip = this._createTipElement()
   
+    this._element.setAttribute('aria-describedby', this.tip.getAttribute('id'))
+
+    const { container } = this._config
+
+    if (!this._element.ownerDocument.documentElement.contains(this.tip)) {
+      container.append(this.tip)
+      EventHandler.trigger(this._element, 'inserted.tooltip')
+    }
+
+    if (this._popper) {
+      this._popper.update()
+    } else {
+      this._popper = this._createPopper(this.tip)
+    }
+    
+    this.tip.classList.add('show')
+    log([this.tip, this._element])
+
+    const complete = () => {
+      const previousHoverState = this._isHovered
+
+      this._isHovered = false
+      EventHandler.trigger(this._element, 'shown.tooltip')
+
+      if (previousHoverState) {
+        this._leave()
+      }
+    }
+
+    this._queueCallback(complete, this.tip, this._isAnimated)
+  }
+
+  _createTipElement() {
     const templateWrapper = document.createElement('div')
     templateWrapper.innerHTML = this._config.template
     templateWrapper.querySelector('.tooltip-inner').textContent = this._config.originalTitle
 
-    const tip = templateWrapper
+    const tip = templateWrapper.children[0]
+    tip.classList.remove('fade', 'show')
+    tip.classList.add('tooltip-auto')
 
     const tipId = getUID(NAME).toString()
-    console.log(tipId)
+    tip.setAttribute('id', tipId)
 
+    if (this._isAnimated()) {
+      tip.classList.add('fade')
+    }
+
+    return tip
+  }
+
+  _createPopper(tip) {
+    const { placement } = this._config
+    return Popper.createPopper(this._element, tip, this._getPopperConfig(placement))
   }
 
   // Private
-  _getTipElement() {
-    if (!this.tip) {
-      console.log(this._element.children)
-      // this.tip = this._createTipElement(this._newContent || this._getContentForTemplate())
-    }
-
-    return this.tip
-  }
-
-  _getContentForTemplate() {
-    return {
-      '.tooltip-inner': this._getTitle()
-    }
-  }
-
-  _getTitle() {
-    return this._config.title || this._config.originalTitle
-  }
-
-  _createTipElement(content) {
-    const templateWrapper = document.createElement('div')
-    templateWrapper.innerHTML = this._config.template
-
-    for (const [selector, text] of Object.entries(content)) {
-      this._setContent(templateWrapper, text, selector)
-    }
-
-    console.log(templateWrapper)
-
-    // if (!tip) {
-    //   return null
-    // }
-
-    // tip.classList.remove('fade', 'show')
-    // tip.classList.add('tooltip-auto')
-
-    // const tipId = getUID('tooltip').toString()
-
-    // tip.setAttribute('id', tipId)
-
-    // if (this._isAnimated()) {
-    //   tip.classList.add('fade')
-    // }
-
-    // return tip
-  }
-
-  _setContent(template, centent, selector) {
-    const templateElement = SelectorEngine.findOne(selector, template)
-
-    if (!templateElement) {
-      return
-    }
-
-    if (!content) {
-      templateElement.remove()
-    }
-  }
-
   _isAnimated() {
     return this._config.animation || (this.tip && this.tip.classList.contains('fade'))
   }
@@ -196,6 +189,8 @@ class Tooltip extends BaseComponent {
       }
     }, this._config.delay.show)
   }
+
+  _leave() {}
 
   _isShow() {
     return this.tip && this.tip.classList.contains('show')
@@ -237,6 +232,62 @@ class Tooltip extends BaseComponent {
 
   _initializeOnDelegatedTarget(event) {
     return
+  }
+
+  _getOffset() {
+    const { offset } = this._config
+
+    if (typeof offset === 'string') {
+      return offset.split(',').map(value => Number.parseInt(value, 10))
+    }
+
+    if (typeof offset === 'function') {
+      return popperData => offset(popperData, this._element)
+    }
+
+    return offset
+  }
+
+  _getPopperConfig(attachment) {
+    const defaultBsPopperConfig = {
+      placement: attachment,
+      modifiers: [
+        {
+          name: 'flip',
+          options: {
+            fallbackPlacements: this._config.fallbackPlacements
+          }
+        },
+
+        {
+          name: 'preventOverflow',
+          options: {
+            boundary: this._config.boundary
+          }
+        },
+        {
+          name: 'arrow',
+          options: {
+            element: `.tooltip-arrow`
+          }
+        },
+        {
+          name: 'preSetPlacement',
+          enabled: true,
+          phase: 'beforeMain',
+          fn: data => {
+            // Pre-set Popper's placement attribute in order to read the arrow sizes properly.
+            // Otherwise, Popper mixes up the width and height dimensions since the initial arrow style is for top placement
+            this._createTipElement().setAttribute('data-popper-placement', data.state.placement)
+          }
+        }
+      ]
+    }
+
+    return {
+      ...defaultBsPopperConfig,
+      ...(typeof this._config.popperConfig === 'function' ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig)
+    }
   }
 
   _configAfterMerge(config) {
