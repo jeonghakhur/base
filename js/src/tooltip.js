@@ -28,7 +28,7 @@ const Default = {
             '<div class="tooltip-inner"></div>' +
             '</div>',
   title: '',
-  trigger: 'hover focus'
+  trigger: 'click'
 }
 
 const DefaultType = {
@@ -208,7 +208,7 @@ class Tooltip extends BaseComponent {
 
     for (const trigger of triggers) {
       if (trigger === 'click') {
-
+        EventHandler.on(this._element, 'click.tooltip', false, event => this.show(event))
       } else if (trigger !== 'manual') {
         const eventIn = trigger === 'hover' ? 'mouseenter' : 'focusin'
         const eventOut = trigger === 'hover' ? 'mouseleave': 'focusout'
@@ -258,7 +258,12 @@ class Tooltip extends BaseComponent {
             fallbackPlacements: this._config.fallbackPlacements
           }
         },
-
+        {
+          name: 'offset',
+          options: {
+            offset: this._getOffset()
+          }
+        },
         {
           name: 'preventOverflow',
           options: {
@@ -278,7 +283,7 @@ class Tooltip extends BaseComponent {
           fn: data => {
             // Pre-set Popper's placement attribute in order to read the arrow sizes properly.
             // Otherwise, Popper mixes up the width and height dimensions since the initial arrow style is for top placement
-            this._createTipElement().setAttribute('data-popper-placement', data.state.placement)
+            this._createTipElement().setAttribute('data-placement', data.state.placement)
           }
         }
       ]

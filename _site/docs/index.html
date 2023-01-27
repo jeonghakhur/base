@@ -6,9 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="../../node_modules/jquery/dist/jquery.js"></script>
-  <script src="../../dist/js/popper.min.js"></script>
-  <script src="../../dist/js/uxui.js"></script>
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
@@ -29,10 +26,7 @@
                 me
               </div>
             </a>
-            <p>Modal body text goes here.</p>
-            <p>Modal body text goes here.</p>
-            <p>Modal body text goes here.</p>
-            <p>Modal body text goes here.</p>
+
           </div>
 
         </div>
@@ -44,16 +38,26 @@
       </div>
     </div>
   </div>
-  <div class="w-100 bc-warning" style="height: 100vh">
+  <div class="w-100 bc-warning" style="height: 300vh">
     <!-- <div class="is-fixed" style="position: fixed; top: 0; width: 100%; text-align: right">
       division content
     </div> -->
-    <button type="button" data-toggle="modal" data-target="#modalA">Modal Open</button>
+    <!-- <button type="button" data-toggle="modal" data-target="#modalA">Modal Open</button> -->
+    <div class="d-flex p-12">
+      <a href="#" class="p-4" data-toggle="tooltip" data-placement="right"
+        title="Some tooltip text!Some tooltip text!Some tooltip text!">
+        <span> Hover over me</span><br>
+        <span> Hover over me</span>
+      </a>
+    </div>
   </div>
-
+  <script src="../../node_modules/jquery/dist/jquery.js"></script>
+  <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
+  <script src="../../dist/js/popper.min.js"></script>
+  <script src="../../dist/js/uxui.js"></script>
   <script>
     $(function () {
-      $('.modal').modal('show')
+      // $('.modal').modal('show')
       $('[data-toggle="tooltip"]').tooltip()
 
       $('.modal').on('shown.modal', function () {
