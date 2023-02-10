@@ -275,16 +275,6 @@ class Tooltip extends BaseComponent {
           options: {
             element: `.tooltip-arrow`
           }
-        },
-        {
-          name: 'preSetPlacement',
-          enabled: true,
-          phase: 'beforeMain',
-          fn: data => {
-            // Pre-set Popper's placement attribute in order to read the arrow sizes properly.
-            // Otherwise, Popper mixes up the width and height dimensions since the initial arrow style is for top placement
-            this._createTipElement().setAttribute('data-placement', data.state.placement)
-          }
         }
       ]
     }
